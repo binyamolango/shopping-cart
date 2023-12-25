@@ -10,16 +10,11 @@ import { useEffect, useState } from 'react';
 const ProductList = (props) => {
   const { products } = props;
 
-  const defaultQuantities = products.reduce((acc, product) => {
-    acc[product.id] = 0;
-    return acc;
-  }, {});
-
-  const [quantities, setQuantities] = useState(defaultQuantities);
+  const [quantities, setQuantities] = useState([]);
 
   const initializeQuantities = () => {
     const initialQuantities = {};
-    products.forEach(product => {
+    products && products.forEach(product => {
       initialQuantities[product.id] = 0;
     });
 
@@ -28,6 +23,7 @@ const ProductList = (props) => {
 
   useEffect(() => {
     initializeQuantities();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [products]);
 
   const incrementQuantity = (productId) => {
@@ -82,13 +78,13 @@ const ProductList = (props) => {
 
   return (
     <Row>
-      {products.map((product) => (
+      {products && products.map((product) => (
         <Col xs={6} md={4} key={product.id}>
           <Card className='card__row'>
-            <Card.Img variant="top" src={product.img} alt='prod_img' />
+            <Card.Img variant="top" src={product.image} alt='prod_img' />
             <Card.Body>
               <Card.Title>{product.title}</Card.Title>
-              <Card.Text>{product.price}</Card.Text>
+              <Card.Text>{`$${product.price}`}</Card.Text>
               <InputGroup className="mb-3 quantity__input">
                 <InputGroup.Text id="inputGroup-sizing-default">
                   Quantity
@@ -96,7 +92,7 @@ const ProductList = (props) => {
                 <Form.Control
                   aria-label="Default"
                   aria-describedby="inputGroup-sizing-default"
-                  value={quantities[product.id]}
+                  value={quantities[product.id] || 0}
                   onChange={(e) => handleQuantityChange(product.id, e.target.value)}
                 />
                 <div className="up__down__arrow">
