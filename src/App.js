@@ -1,10 +1,14 @@
+import Cart from "./Cart";
 import Header from "./Header";
+import Product from "./Product";
 
 function App() {
   return (
     <div className="App">
-      <div className="content">
         <Header />
+      <div className="content">
+        <Product />
+        <Cart />
       </div>
     </div>
   );
