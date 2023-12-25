@@ -45,6 +45,10 @@ const ProductList = (props) => {
   };
 
   const handleQuantityChange = (productId, newQuan) => {
+    if (newQuan <= 0) {
+      return;
+    }
+    
     const newQuantity = Math.max(0, newQuan);
 
     setQuantities(prevQuantities => ({
@@ -54,18 +58,26 @@ const ProductList = (props) => {
   }
 
   const handleClick = (product) => {
-    cartItem.push({
-      id: product.id,
-      title: product.title,
-      price: product.price,
-      category: product.category,
-      quantity: quantities[product.id]
-    });
+    const existingItemIndex = cartItem.findIndex(item => item.id === product.id);
+
+    if (existingItemIndex !== -1) {
+      cartItem[existingItemIndex].quantity += quantities[product.id];
+    } else if (quantities[product.id] === 0) {
+      return;
+    } else {
+      cartItem.push({
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        category: product.category,
+        quantity: quantities[product.id]
+      })
+    };
 
     setQuantities(prevQuantities => ({
       ...prevQuantities,
       [product.id]: 0
-    }))
+    }));
   };
 
   return (
