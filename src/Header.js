@@ -9,7 +9,7 @@ const Header = () => {
         <Navbar.Brand href="/">Shopping Cart</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav>
+          <Nav activeKey="/">
             <Nav.Link href="/">Products</Nav.Link>
             <Nav.Link href="/cart">Cart</Nav.Link>
           </Nav>
