@@ -6,12 +6,12 @@ const Header = () => {
   return (
     <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
       <Container>
-        <Navbar.Brand href="#home">Shopping Cart</Navbar.Brand>
+        <Navbar.Brand href="/">Shopping Cart</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav>
-            <Nav.Link href="#deets">Products</Nav.Link>
-            <Nav.Link href="#memes">Cart</Nav.Link>
+            <Nav.Link href="/">Products</Nav.Link>
+            <Nav.Link href="/cart">Cart</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
