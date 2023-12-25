@@ -16,3 +16,12 @@ body {
   justify-content: flex-end;
   margin-top: 0.7em;
 }
+
+.up__down__arrow button {
+  border: none;
+  background: none;
+}
+
+.quantity__input {
+  align-items: center;
+}
