@@ -2,10 +2,13 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button';
 import { useEffect, useState } from 'react';
+import useFetch from './useFetch';
 
 const QuantityInput = (props) => {
+  const baseURL = 'https://fakestoreapi.com';
   const { products, product } = props;
   const [quantities, setQuantities] = useState([]);
+  const { data: cartItem } = useFetch(`${baseURL}/carts`)
 
   const initializeQuantities = () => {
     const initialQuantities = {};
@@ -49,21 +52,27 @@ const QuantityInput = (props) => {
   }
 
   const handleAddToCart = (product) => {
-    // const existingItemIndex = cartItem.findIndex(item => item.id === product.id);
+    const existingItemIndex = cartItem && cartItem.findIndex(item => item.id === product.id);
 
-    // if (existingItemIndex !== -1) {
-    //   cartItem[existingItemIndex].quantity += quantities[product.id];
-    // } else if (quantities[product.id] === 0) {
-    //   return;
-    // } else {
-    //   cartItem.push({
-    //     id: product.id,
-    //     title: product.title,
-    //     price: product.price,
-    //     category: product.category,
-    //     quantity: quantities[product.id]
-    //   })
-    // };
+    if (existingItemIndex !== -1) {
+      cartItem[existingItemIndex].quantity += quantities[product.id];
+    } else if (quantities[product.id] === 0) {
+      return;
+    } else {
+        fetch('https://fakestoreapi.com/carts',{
+          method:"POST",
+          headers: { "Content-Type": "application/json" },
+          body:JSON.stringify(
+            {
+              userId:5,
+              date:'2020-02-03',
+              products:[{productId:product.id, quantity:quantities[product.id]}]
+            }
+          )
+        }).then(() => {
+          console.log('hi')
+        })
+    }
 
     setQuantities(prevQuantities => ({
       ...prevQuantities,

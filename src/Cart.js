@@ -50,9 +50,9 @@ const Cart = () => {
                       item.products && item.products.map(product => (
                         products && products
                           .filter(prod => prod.id === product.productId)
-                          .map(filteredProd => (
+                          .map((filteredProd, idx) => (
                             <div key={product.productId}>
-                              Name:  <strong>{filteredProd.title}</strong>, 
+                              - Name:  <strong>{filteredProd.title}</strong>, 
                               Quantity:  <strong>{product.quantity}</strong>, 
                               Price:  <strong>{`$${product.quantity * filteredProd.price}`}</strong>
                             </div>
