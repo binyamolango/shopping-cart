@@ -31,4 +31,19 @@ describe('Cart', () => {
       expect(itemCategory).toBeInTheDocument();
     });
   });
+
+  test('cart should display the checkout button when cart is not empty', () => {
+    const cartItems = [
+      { id: 1, title: 'Product 1', quantity: 2, price: 10, category: 'Category 1' }
+    ];
+    render(<Cart />);
+    const checkoutButton = screen.getByRole('button', { name: 'Checkout' });
+    expect(checkoutButton).toBeInTheDocument();
+  });
+
+  test('cart should not display the checkout button when cart is empty', () => {
+    render(<Cart />);
+    const checkoutButton = screen.queryByRole('button', { name: 'Checkout' });
+    expect(checkoutButton).not.toBeInTheDocument();
+  });
 })
