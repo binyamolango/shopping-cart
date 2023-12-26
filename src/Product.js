@@ -3,80 +3,23 @@ import Spinner from 'react-bootstrap/Spinner';
 import Alert from 'react-bootstrap/Alert';
 import ProductList from './ProductList';
 import Category from './Category';
-import { useEffect, useState } from 'react';
+import useFetch from './useFetch';
 
 const Product = () => {
-  const [products, setProducts] = useState(null);
-  const [isPending, setIsPending] = useState(true);
-  const [error, setError] = useState(null);
-  const [category, setCategory] = useState('');
-
   const url = 'https://fakestoreapi.com/products';
 
-  useEffect(() => {
-    fetch(url)
-    .then(res=>{
-      if(!res.ok) {
-        throw Error("404 Error, Couldn't fetch the data!")
-      } else {
-        return res.json();
-      }
-    })
-    .then(data=>{
-      setProducts(data);
-      setIsPending(false);
-    })
-    .catch(err => {
-      setError(err.message);
-      setIsPending(false);
-    })
-    setCategory("Select Category")
-  }, []);
-
-  const handleAllProducts = () => {
-    fetch(url)
-    .then(res=>res.json())
-    .then(data=>{
-      setProducts(data);
-    });
-    setCategory('All Products')
-  };
-
-  const handleElectronicsProducts = () => {
-    fetch(`${url}/category/electronics`)
-    .then(res=>res.json())
-    .then(data=>{
-      setProducts(data);
-    });
-    setCategory('Electronics')
-  };
-
-  const handleJeweleryProducts = () => {
-    fetch(`${url}/category/jewelery`)
-    .then(res=>res.json())
-    .then(data=>{
-      setProducts(data);
-    });
-    setCategory('Jewelry')
-  };
-
-  const handleMenClothingProducts = () => {
-    fetch(`${url}/category/men's clothing`)
-    .then(res=>res.json())
-    .then(data=>{
-      setProducts(data);
-    });
-    setCategory("Men's Clothing")
-  };
-
-  const handleWomenClothingProducts = () => {
-    fetch(`${url}/category/women's clothing`)
-    .then(res=>res.json())
-    .then(data=>{
-      setProducts(data);
-    });
-    setCategory("Women's Clothing")
-  };
+  const {
+    data: products,
+    isPending,
+    error,
+    category,
+    setError,
+    handleAllProducts,
+    handleElectronicsProducts,
+    handleJeweleryProducts,
+    handleMenClothingProducts,
+    handleWomenClothingProducts
+  } = useFetch(url);
 
   return (
     <div className="product-page">
