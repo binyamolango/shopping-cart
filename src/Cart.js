@@ -34,17 +34,15 @@ const Cart = () => {
                   <td>
                     {
                       item.products && item.products.map(product => (
-                        <div key={product.productId}>
-                          {products
-                            .filter(prod => prod.id === product.productId)
-                            .map(filteredProd => (
-                              <div>
-                                Name:  {filteredProd.title}, 
-                                Quantity:  {product.quantity}, 
-                                Price:  {`$${product.quantity * filteredProd.price}`}
-                              </div>
-                            ))}
-                        </div>
+                        products
+                          .filter(prod => prod.id === product.productId)
+                          .map(filteredProd => (
+                            <div key={product.productId}>
+                              Name:  <strong>{filteredProd.title}</strong>, 
+                              Quantity:  <strong>{product.quantity}</strong>, 
+                              Price:  <strong>{`$${product.quantity * filteredProd.price}`}</strong>
+                            </div>
+                          ))
                       ))
                     }
                   </td>
