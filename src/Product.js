@@ -6,7 +6,7 @@ import Category from './Category';
 import useFetch from './useFetch';
 
 const Product = () => {
-  const url = 'https://fakestoreapi.com/products';
+  const baseURL = 'https://fakestoreapi.com';
 
   const {
     data: products,
@@ -19,7 +19,7 @@ const Product = () => {
     handleJeweleryProducts,
     handleMenClothingProducts,
     handleWomenClothingProducts
-  } = useFetch(url);
+  } = useFetch(`${baseURL}/products`);
 
   return (
     <div className="product-page">
