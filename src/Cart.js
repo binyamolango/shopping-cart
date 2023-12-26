@@ -2,9 +2,11 @@ import Container from 'react-bootstrap/Container';
 import Table from 'react-bootstrap/Table';
 import Badge from 'react-bootstrap/Badge';
 import { useEffect, useState } from 'react';
+import useFetch from './useFetch';
 
 const Cart = () => {
   const [cartItem, setCartItem] = useState(null);
+  const { data: products } = useFetch('https://fakestoreapi.com/products');
 
   useEffect(() => {
     fetch('https://fakestoreapi.com/carts')
@@ -33,8 +35,15 @@ const Cart = () => {
                     {
                       item.products && item.products.map(product => (
                         <div key={product.productId}>
-                          <div>ProductId: {product.productId}</div>
-                          <div>Quantity: {product.quantity}</div>
+                          {products
+                            .filter(prod => prod.id === product.productId)
+                            .map(filteredProd => (
+                              <div>
+                                Name:  {filteredProd.title}, 
+                                Quantity:  {product.quantity}, 
+                                Price:  {`$${product.quantity * filteredProd.price}`}
+                              </div>
+                            ))}
                         </div>
                       ))
                     }
