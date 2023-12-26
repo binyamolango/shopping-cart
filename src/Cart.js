@@ -13,7 +13,6 @@ const Cart = () => {
           <Table striped bordered hover>
             <thead>
               <tr>
-                <th>#</th>
                 <th>Product Name</th>
                 <th>Quantity</th>
                 <th>Price</th>
@@ -23,7 +22,6 @@ const Cart = () => {
             <tbody>
               {cartItem.map(item => (
                 <tr key={item.id}>
-                  <td>{item.id}</td>
                   <td>{item.title}</td>
                   <td>{item.quantity}</td>
                   <td>{`$${item.price * item.quantity}`}</td>
