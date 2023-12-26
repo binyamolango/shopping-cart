@@ -25,3 +25,12 @@ body {
 .quantity__input {
   align-items: center;
 }
+
+.spinner__loading,
+.error__message {
+  display: flex;
+  width: 100%;
+  height: 70vh;
+  justify-content: center;
+  align-items: center;
+}
