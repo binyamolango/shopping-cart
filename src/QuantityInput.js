@@ -1,7 +1,6 @@
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button';
-import { cartItem } from './Cart';
 import { useEffect, useState } from 'react';
 
 const QuantityInput = (props) => {
@@ -50,21 +49,21 @@ const QuantityInput = (props) => {
   }
 
   const handleAddToCart = (product) => {
-    const existingItemIndex = cartItem.findIndex(item => item.id === product.id);
+    // const existingItemIndex = cartItem.findIndex(item => item.id === product.id);
 
-    if (existingItemIndex !== -1) {
-      cartItem[existingItemIndex].quantity += quantities[product.id];
-    } else if (quantities[product.id] === 0) {
-      return;
-    } else {
-      cartItem.push({
-        id: product.id,
-        title: product.title,
-        price: product.price,
-        category: product.category,
-        quantity: quantities[product.id]
-      })
-    };
+    // if (existingItemIndex !== -1) {
+    //   cartItem[existingItemIndex].quantity += quantities[product.id];
+    // } else if (quantities[product.id] === 0) {
+    //   return;
+    // } else {
+    //   cartItem.push({
+    //     id: product.id,
+    //     title: product.title,
+    //     price: product.price,
+    //     category: product.category,
+    //     quantity: quantities[product.id]
+    //   })
+    // };
 
     setQuantities(prevQuantities => ({
       ...prevQuantities,

@@ -1,31 +1,45 @@
 import Container from 'react-bootstrap/Container';
 import Table from 'react-bootstrap/Table';
 import Badge from 'react-bootstrap/Badge';
-
-export const cartItem = [];
+import { useEffect, useState } from 'react';
 
 const Cart = () => {
+  const [cartItem, setCartItem] = useState(null);
+
+  useEffect(() => {
+    fetch('https://fakestoreapi.com/carts')
+    .then(res=>res.json())
+    .then(data=>setCartItem(data))
+  }, [])
+
   return (
     <div className="cart-page">
       <Container>
         <h2>My cart</h2>
-        { cartItem.length === 0 ? <Badge bg="secondary">No product selected</Badge> : (
+        { cartItem && cartItem.length === 0 ? <Badge bg="secondary">No product selected</Badge> : (
           <Table striped bordered hover>
             <thead>
               <tr>
-                <th>Product Name</th>
-                <th>Quantity</th>
-                <th>Price</th>
-                <th>Category</th>
+                <th>ID</th>
+                <th>Products</th>
+                <th>Date</th>
               </tr>
             </thead>
             <tbody>
-              {cartItem.map(item => (
+              {cartItem && cartItem.map(item => (
                 <tr key={item.id}>
-                  <td>{item.title}</td>
-                  <td>{item.quantity}</td>
-                  <td>{`$${item.price * item.quantity}`}</td>
-                  <td>{item.category}</td>
+                  <td>{item.id}</td>
+                  <td>
+                    {
+                      item.products && item.products.map(product => (
+                        <div key={product.productId}>
+                          <div>ProductId: {product.productId}</div>
+                          <div>Quantity: {product.quantity}</div>
+                        </div>
+                      ))
+                    }
+                  </td>
+                  <td>{item.date}</td>
                 </tr>
               ))}
             </tbody>
