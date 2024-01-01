@@ -7,6 +7,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+img {
+  width: 250px;
+  height: 500px;
+}
+
 .card__row {
   margin: 0.7em 0;
 }
