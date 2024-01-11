@@ -9,7 +9,7 @@ const ProductList = (props) => {
   return (
     <Row>
       {products && products.map((product) => (
-        <Col xs={6} md={4} key={product.id}>
+        <Col xs={12} md={6} lg={4} key={product.id}>
           <Card className='card__row'>
             <Card.Img variant="top" src={product.image} alt='prod_img' />
             <Card.Body>
